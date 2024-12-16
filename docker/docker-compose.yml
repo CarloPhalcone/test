@@ -63,3 +63,17 @@ services:
         - ./redis:/data
     networks:
         - test
+
+  artisan:
+      build:
+          context: ./php
+          dockerfile: php.dockerfile
+      container_name: artisan
+      volumes:
+          - ../:/var/www
+      depends_on:
+          - mysql
+      working_dir: /var/www
+      entrypoint: [ 'php', '/var/www/artisan' ]
+      networks:
+          - test
